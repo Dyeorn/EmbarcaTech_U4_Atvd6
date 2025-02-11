@@ -1,8 +1,8 @@
 <img width=100% src="https://capsule-render.vercel.app/api?type=waving&color=00bfbf&height=120&section=header"/>
-<h1 align="center"><img align="center" style="border-radius: 100%;" src="https://github.com/user-attachments/assets/d96d3f73-4cff-4f9f-9feb-cf8a7ccfd9d3" width="300px;" alt=""><br>Clock e Temporizadores BitDogLab</h1>
+<h1 align="center"><img align="center" style="border-radius: 100%;" src="https://github.com/user-attachments/assets/d96d3f73-4cff-4f9f-9feb-cf8a7ccfd9d3" width="300px;" alt=""><br>Comunicação Serial BitDogLab</h1>
 
 <h3 align="center">
-   Clocks e Temporizadores na placa BitDogLab em Linguagem C
+   Comunicação Serial na placa BitDogLab em Linguagem C
 </h3>
 
 ---
@@ -27,56 +27,25 @@ Tabela de conteúdos
 
 ## 💻 Sobre o projeto
 
-### Atividade 1: 
+Este projeto implementa a comunicação serial e a interação entre a placa BitDogLab (Raspberry Pi Pico W) e diversos componentes, incluindo uma matriz de LEDs WS2812, um LED RGB, botões físicos e um display SSD1306.
 
-Este projeto implementa um sistema de controle de semáforo utilizando a placa BitDogLab (Raspberry Pi Pico W) com o uso de temporizadores. O sistema simula a mudança de cores do semáforo (vermelho, amarelo e verde) a cada 3 segundos, indicando o estado atual através do monitor serial.
+Os principais objetivos incluem:
+- Exibir caracteres digitados no Serial Monitor no display SSD1306.
+- Exibir números na matriz 5x5 WS2812 conforme digitado no Serial Monitor.
+- Alternar estados do LED RGB ao pressionar os botões A e B.
+- Registrar operações via Serial Monitor e no display SSD1306.
 
-Componentes Utilizados:
+### Componentes Utilizados
+- Matriz de LEDs WS2812 (5x5) - Conectada à GPIO 7.
+- LED RGB - Conectado às GPIOs 11, 12 e 13.
+- Botão A - Conectado à GPIO 5.
+- Botão B - Conectado à GPIO 6.
+- Display SSD1306 (I2C) - Conectado às GPIOs 14 e 15.
 
-- LED Vermelho (GPIO 13) - Indica "PARE!".
-
-- LED Amarelo (GPIO 12) - Indica "ATENÇÃO!".
-
-- LED Verde (GPIO 11) - Indica "SIGA!".
-
-O código utiliza um temporizador repetitivo para alternar as cores e exibir mensagens no console.
-
-### Atividade 2: 
-
-Este projeto implementa um sistema de controle de LEDs utilizando a placa BitDogLab (Raspberry Pi Pico W) com o uso de interrupções e temporizadores. Através do pressionamento de um botão, três LEDs (azul, vermelho e verde) são acesos simultaneamente e desligados em sequência, com intervalos de 3 segundos entre cada um. O status dos LEDs é exibido no monitor serial durante a execução do programa.
-
-Componentes Utilizados:
-
-- Botão (GPIO 5) - Dispara a sequência de iluminação dos LEDs.
-
-- LED Azul (GPIO 13) - Primeiro a ser desligado.
-
-- LED Vermelho (GPIO 12) - Segundo a ser desligado.
-
-- LED Verde (GPIO 11) - Último a ser desligado.
----
 
 ## 🎨 Layout Repositorio Github
 <i>
-EmbarcaTech_U4_Clock-Temporizadores
-
-- Atvd1_Temporizador_Periodico
-
-   - assets/&emsp;&emsp;&emsp;&emsp;# Midias do Projeto
-       - diagrama.png
-       - Video_Demonstration
-
-   - CMakeLists.txt
-   
-   - diagram.json&emsp;&emsp;&emsp;&emsp;# Arquivo Wokwi do BitDogLab
-   
-   - main.c&emsp;&emsp;&emsp;&emsp; # Código principal do projeto
-   
-   - pico_sdk_import.cmake
-   
-   - wokwi.toml
-
-- Atvd2_OneShot
+EmbarcaTech_U4_Atvd6
 
    - assets/&emsp;&emsp;&emsp;&emsp;# Midias do Projeto
        - diagrama.png
@@ -99,15 +68,19 @@ EmbarcaTech_U4_Clock-Temporizadores
 
 ## ⚙️ Funcionalidades
 
-### Atividade 1:
-- Alternância entre os estados "PARE" - Vermelho, "ATENÇÃO" - Amarelo e "SIGA" - Verde.
-- Mensagens no monitor serial indicando o estado atual.
-- Ciclo de troca de cor a cada 3 segundos.
+### Modificação da Biblioteca font.h
+- Adicionar caracteres minúsculos ao font.h para exibição no display SSD1306.
 
-### Atividade 2:
-- Acionamento dos LEDs através do botão.
-- Desligamento automático dos LEDs em sequência com intervalos de 3 segundos.
-- Indicação do status dos LEDs via mensagens no monitor serial.
+### Entrada de Caracteres via Serial Monitor
+- Exibir o caractere digitado no Serial Monitor no display SSD1306.
+- Caso um número de 0 a 9 seja digitado, exibir um símbolo correspondente na matriz 5x5 WS2812.
+### Interação com os Botões
+- Botão A (GPIO 5): Alterna o estado do LED Verde (GPIO 13).
+- Exibe mensagem no display SSD1306.
+- Envia um texto descritivo ao Serial Monitor.
+- Botão B (GPIO 6): Alterna o estado do LED Azul (GPIO 11).
+- Exibe mensagem no display SSD1306.
+- Envia um texto descritivo ao Serial Monitor.
 
 ---
 
@@ -132,10 +105,10 @@ Além disto é bom ter um editor para trabalhar com o código como [VSCode](http
   - Abra o terminal de comando Git Bash 
   - Clone o repositório do GitHub com o comando:
 ```
-$ git clone https://github.com/Dyeorn/EmbarcaTech_U4_Clock-Temporizadores
+$ git clone https://github.com/Dyeorn/EmbarcaTech_U4_Atvd6
 ```
 - Opção 2:
-  - No repósitorio [EmbarcaTech_U4_Clock-Temporizadores](https://github.com/Dyeorn/EmbarcaTech_U4_Clock-Temporizadores) aperte o Botão <i><>code</i>
+  - No repósitorio [EmbarcaTech_U4_Clock-Temporizadores](https://github.com/Dyeorn/EmbarcaTech_U4_Atvd6) aperte o Botão <i><>code</i>
   - Aperte a opção <i>Dowload ZIP</i>
 
 
@@ -182,11 +155,7 @@ elf = 'build/main.elf'
 ### 💿 Diagrama Visual do Projeto
 
 Atividade 1:
-<p align="center"><img width="700" height="400" src="Atvd1_Temporizador_Periodico/assets/Diagrama.png"></p>
-
-Atividade 2:
-<p align="center"><img width="700" height="400" src="Atvd2_OneShot/assets/Diagrama.png"></p>
-
+<p align="center"><img width="700" height="400" src="assets/Diagrama.png"></p>
 
 ---
 
