@@ -149,7 +149,7 @@ elf = 'build/main.elf'
 - Na aba da extensão [Raspberry Pi Pico](https://marketplace.visualstudio.com/items?itemName=raspberry-pi.raspberry-pi-pico), aperte para Importar o projeto
 - Compile o projeto
 - Entre na pasta <i>build/</i>
-- Cole o arquivo <i>nmain.uf2</i> no armazenamento placa BitDog
+- Cole o arquivo <i>main.uf2</i> no armazenamento placa BitDog
 - Ou, apenas compile o projeto e clique em "Run Project (USB)
 <br>
 
@@ -159,7 +159,7 @@ elf = 'build/main.elf'
 
 ### 💿 Diagrama Visual do Projeto
 
-<p align="center"><img width="700" height="400" src="assets/Diagrama.png"></p>
+<p align="center"><img width="700" height="400" src="assets/Captura de tela 2025-02-09 203632.png"></p>
 
 Link para o video no youtube: https://youtu.be/aCsAfo0n3FI
 
