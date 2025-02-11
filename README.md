@@ -50,6 +50,11 @@ EmbarcaTech_U4_Atvd6
    - assets/&emsp;&emsp;&emsp;&emsp;# Midias do Projeto
        - diagrama.png
        - Video_Demonstration
+    
+   - inc
+        - font.h
+        - ssd1306.c
+        - ssd1306.h
 
    - CMakeLists.txt
    
@@ -154,8 +159,9 @@ elf = 'build/main.elf'
 
 ### 💿 Diagrama Visual do Projeto
 
-Atividade 1:
 <p align="center"><img width="700" height="400" src="assets/Diagrama.png"></p>
+
+Link para o video no youtube: https://youtu.be/aCsAfo0n3FI
 
 ---
 
