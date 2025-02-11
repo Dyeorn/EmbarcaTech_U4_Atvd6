@@ -8,22 +8,18 @@
 #include "inc/font.h"
 #include "inc/ssd1306.h"
 
-//-------------------------------------------
-
-// Pinos e porta I2C
-#define LED_PIN_GREEN 11 //led verde
-#define LED_PIN_BLUE 12 //led azul
-#define LED_PIN_RED 13 //led vermelho
-#define NUM_PIXELS 25 //número de leds na matriz
-#define LED_PIN 7 //pino de saída da matriz de led
-#define BOTAO_A 5 //pino saida botao a
-#define BOTAO_B 6 //pino saida botao b
+#define LED_PIN_GREEN 11
+#define LED_PIN_BLUE 12
+#define LED_PIN_RED 13
+#define NUM_PIXELS 25
+#define LED_PIN 7
+#define BOTAO_A 5
+#define BOTAO_B 6
 #define I2C_PORT i2c1 //porta I2C
 #define I2C_SDA 14 //pino SDA
 #define I2C_SCL 15 //pino SCL
 #define display_address 0x3C //endereço do display
 
-// Variáveis globais
 int static volatile indice = 0; //indice do vetor de leds
 uint count = 0; //contador de tempo
 uint actual_time = 0; //tempo atual
@@ -48,7 +44,6 @@ uint matrix_rgb(float r, float g, float b){
     return (R << 16) | (G << 24) | (B << 8);
 }
 
-//-------------------------------------------
 
 // Função para converter as posições da matriz para vetorial
   int getIndex(int x, int y){
@@ -62,7 +57,7 @@ uint matrix_rgb(float r, float g, float b){
   }
 
   
-  // FUNCAO PARA DESENHAR A MATRIZ
+  // Função para desenhar na matriz
   void desenho_pio(double *desenho, uint32_t valor_led, PIO pio, uint sm, double r, double g, double b) {
     for (int16_t i = 0; i < NUM_PIXELS; i++) {
         valor_led = matrix_rgb(desenho[i] * r, desenho[i] * g, desenho[i] * b);
@@ -70,7 +65,7 @@ uint matrix_rgb(float r, float g, float b){
     }
 }
 
-//NUMEROS PARA EXIBIR NA MATRIZ DE LED
+//Numeros para exibir na matriz
 
 double numero0[25] = {    //Número 0
     1.0, 1.0, 1.0, 1.0, 1.0,
@@ -149,12 +144,12 @@ double apagar_leds[25] ={   //Apagar LEDs da matriz
     0.0, 0.0, 0.0, 0.0, 0.0,
     0.0, 0.0, 0.0, 0.0, 0.0};
 
-double *numeros[11] = {numero0, numero1, numero2, numero3, numero4, numero5, numero6, numero7, numero8, numero9, apagar_leds};  // Vetor com os números
+double *numeros[11] = {numero0, numero1, numero2, numero3, numero4, numero5, numero6, numero7, numero8, numero9, apagar_leds};
 
 
 void callback_button(uint gpio, uint32_t events) {
     uint time = to_ms_since_boot(get_absolute_time());
-    if (time - actual_time > 250) { // Condição para evitar múltiplos pressionamentos (debounce)
+    if (time - actual_time > 250) { // Debounce
         actual_time = time;       // Atualiza o tempo
         if (gpio == BOTAO_A) {  // Verifica se o botão A foi pressionado
             GREEN_LED_OFF = !GREEN_LED_OFF; // Inverte o estado do LED verde
@@ -174,6 +169,7 @@ void callback_button(uint gpio, uint32_t events) {
             }
         }
     }
+    
 // Atualização do display
 ssd1306_fill(&ssd, 0); //limpa o display
 
@@ -184,7 +180,6 @@ gpio_get(LED_PIN_BLUE) ? ssd1306_draw_string(&ssd, "Blue LED: ON", 10, 30) :
 ssd1306_send_data(&ssd);
 }
 
-//-------------------------------------------
 
 int main(){
     bool frequenciaClock; // Variável para verificar se a frequência do clock foi configurada corretamente
@@ -214,9 +209,9 @@ gpio_put(LED_PIN_GREEN, false);
 gpio_put(LED_PIN_BLUE, false);
 gpio_put(LED_PIN_RED, false);
 
-    //-------------------------------------------
 
-    // Inicialização do display
+
+// Inicializa o display
 i2c_init(I2C_PORT, 400 * 1000);
 gpio_set_function(I2C_SDA, GPIO_FUNC_I2C); 
 gpio_set_function(I2C_SCL, GPIO_FUNC_I2C); 
@@ -230,9 +225,6 @@ ssd.external_vcc = false;
 ssd1306_init(&ssd, 128, 64, false, display_address, I2C_PORT);
 ssd1306_config(&ssd);   
 
-
-//-------------------------------------------
-
 // Verificação do clock
 printf("iniciando a transmissão PIO");
 if (frequenciaClock){
@@ -241,8 +233,6 @@ if (frequenciaClock){
     printf("erro ao configurar a frequencia do clock");
 }
 
-
-//-------------------------------------------
 
 uint offset = pio_add_program(pio, &pio_matrix_program);
 sm = pio_claim_unused_sm(pio, true);
